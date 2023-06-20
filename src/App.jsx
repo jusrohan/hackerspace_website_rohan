@@ -1,9 +1,13 @@
-import React, { Suspense,useRef } from "react";
+import React, { Suspense,useRef, useState,  useEffect} from "react";
 import { Canvas,useFrame } from "@react-three/fiber";
 import {OrbitControls,useGLTF} from "@react-three/drei";
 import './App.css';
+import Clock from "./Components/Clock";
+
+ 
  function Model(props) {
   const { nodes, materials } = useGLTF('/model.glb')
+ 
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.computer_computer_mat_0.geometry} material={materials.computer_mat} />
@@ -29,8 +33,56 @@ import './App.css';
 
 
 export default function App() {
+  const[timerDays, setTimerDays] = useState();
+  const[timerHours, setTimerHours] = useState();
+  const[timerMinutes, setTimerMinutes] = useState();
+  const[timerSeconds, setTimerSeconds] = useState();
+  
+  let interval;
+
+  const startTimer=()=>{
+    const countDownDate= new Date("June 30,2023ð").getTime();
+
+    interval=setInterval(()=>{
+      const now = new Date().getTime();
+
+      const distance = countDownDate - now;
+
+      const days= Math.floor(distance/(24 * 60 * 60 * 1000));
+
+      const hours= Math.floor((distance % (24 * 60 * 60 * 1000))/(1000*60*60));
+
+      const minutes= Math.floor((distance % (60 * 60 * 1000))/(1000*60));
+
+      const seconds= Math.floor((distance % (60 * 1000))/(1000));
+
+      if(distance<0){
+        // stop timer
+
+        clearInterval(interval.current);
+      }
+      else{
+        setTimerDays(days);
+        setTimerHours(hours);
+        setTimerMinutes(minutes);
+        setTimerSeconds(seconds);
+      }
+    });
+  };
+
+  useEffect(()=> {
+    startTimer();
+  });
+
   return (
     <div className="wrapper" style={{ width: "100vw", height: "100vh" }}>
+      
+      <Clock 
+      timerDays={timerDays} 
+      timerHours={timerHours} 
+      timerMinutes={timerMinutes} 
+      timerSeconds={timerSeconds}/>
+
       <Canvas camera={{fov:100,position:[-1,1,4]}}>
       <OrbitControls enablePan={true} enableZoom={true}/>
         <Suspense fallback={null}>
@@ -41,6 +93,8 @@ export default function App() {
         </Suspense>
      
       </Canvas>
+
+      
     </div>
   );
 }
