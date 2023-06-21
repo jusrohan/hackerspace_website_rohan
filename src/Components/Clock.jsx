@@ -30,7 +30,7 @@ const Clock = ({timerDays, timerHours, timerMinutes, timerSeconds}) => {
 
           <section className='he'>
             <p>{timerSeconds}</p>
-            <small>Seconds</small>
+            <small>Sex</small>
           </section>
         </div>
       </div>
