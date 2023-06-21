@@ -1,12 +1,13 @@
 body{
   padding: 0;
   margin: 0;
+  background-color: #7B0000;
 }
-*{
+/* *{
   margin: 0;
   padding: 0;
   background-color: black;
-}
+} */
 .wrapper{
   margin: 0 auto;
 }
@@ -17,15 +18,19 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  background: black;
-  
-  height: 180px;
-  width: 370px;
-  color: #06f1f6;
+  font-family: 'Orbitron', sans-serif;;
+  font-style: normal;
+  height: 200px;
+  width: 560px;
+  font-size:30px;
+  background: #000000;
+  color: #FC0101;
   text-shadow: 2px 2px 8px;
-  border-radius: 15px;
-  border: 2px solid silver;
-  box-shadow: 0 0 5px 10px;
+  border-radius: 33.77px;
+  border: 2px solid #7B0000;
+  box-shadow: 0 0 2px 2px;
+  line-height: 10px;
+  padding-top:5px;
 }
 
 .clock section{
@@ -37,11 +42,13 @@ body{
 }
 
 .clock section p{
-  font-size: 3rem;
+  font-size: 3.5rem;
+  padding-bottom: 5px;
 }
 
 .timer-container{
-  padding-top: 10px;
+  padding-top: 250px;
   padding-bottom: 10px;
+  padding-left: 500px;
 }
 
