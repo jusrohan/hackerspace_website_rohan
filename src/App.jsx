@@ -33,15 +33,15 @@ import Clock from "./Components/Clock";
 
 
 export default function App() {
-  const[timerDays, setTimerDays] = useState();
-  const[timerHours, setTimerHours] = useState();
-  const[timerMinutes, setTimerMinutes] = useState();
-  const[timerSeconds, setTimerSeconds] = useState();
+  const[timerDays, setTimerDays] = useState("00");
+  const[timerHours, setTimerHours] = useState("00");
+  const[timerMinutes, setTimerMinutes] = useState("00");
+  const[timerSeconds, setTimerSeconds] = useState("00");
   
   let interval;
 
   const startTimer=()=>{
-    const countDownDate= new Date("June 30,2023ð").getTime();
+    const countDownDate= new Date("June 30,2023").getTime();
 
     interval=setInterval(()=>{
       const now = new Date().getTime();
@@ -62,10 +62,10 @@ export default function App() {
         clearInterval(interval.current);
       }
       else{
-        setTimerDays(days);
-        setTimerHours(hours);
-        setTimerMinutes(minutes);
-        setTimerSeconds(seconds);
+        setTimerDays(days >= 10 ? days.toString() : "0" + days);
+        setTimerHours(hours >= 10 ? hours.toString() : "0" + hours);
+        setTimerMinutes(minutes >= 10 ? minutes.toString() : "0" + minutes);
+        setTimerSeconds(seconds >= 10 ? seconds.toString() : "0" + seconds);
       }
     });
   };
@@ -83,7 +83,7 @@ export default function App() {
       timerMinutes={timerMinutes} 
       timerSeconds={timerSeconds}/>
 
-      <Canvas camera={{fov:100,position:[-1,1,4]}}>
+      {/* <Canvas camera={{fov:100,position:[-1,1,4]}}>
       <OrbitControls enablePan={true} enableZoom={true}/>
         <Suspense fallback={null}>
         
@@ -92,7 +92,7 @@ export default function App() {
           
         </Suspense>
      
-      </Canvas>
+      </Canvas> */}
 
       
     </div>
